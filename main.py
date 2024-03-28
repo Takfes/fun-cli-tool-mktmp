@@ -10,7 +10,7 @@ REQUIREMENTS = ['requests', 'argparse']
 FOLDERS = ['app', 'src', 'data', 'docs', 'notebooks', 'tests']
 
 # List of packages to install inside the virtual environment
-PACKAGE_LIST = ['ipykernel', 'pre-commit', 'python-dotenv', 'black','isort','autopep8', 'pytest']
+PACKAGE_LIST = ['ipykernel', 'pre-commit', 'python-dotenv', 'black', 'isort', 'autopep8', 'pytest']
 
 # Dictionary of files to download from Gist and write to the project folder
 GIST_URLS = {
@@ -18,7 +18,7 @@ GIST_URLS = {
     '.flake8': 'https://gist.githubusercontent.com/Takfes/f851ba72f994ec51c9bee09f1ba27417/raw/e1d409a341b042702342be18a07ea2236c701a44/.flake8',
     '.gitignore': 'https://gist.githubusercontent.com/Takfes/f851ba72f994ec51c9bee09f1ba27417/raw/6e49e0e52b539e0dc9be0f6b0f8673b3f894533a/.gitignore',
     'pyproject.toml': 'https://gist.githubusercontent.com/Takfes/f851ba72f994ec51c9bee09f1ba27417/raw/e1d409a341b042702342be18a07ea2236c701a44/pyproject.toml',
-    'precommit-config.yaml': 'https://gist.githubusercontent.com/Takfes/f851ba72f994ec51c9bee09f1ba27417/raw/e1d409a341b042702342be18a07ea2236c701a44/.pre-commit-config.yaml',
+    '.pre-commit-config.yaml': 'https://gist.githubusercontent.com/Takfes/f851ba72f994ec51c9bee09f1ba27417/raw/e1d409a341b042702342be18a07ea2236c701a44/.pre-commit-config.yaml',
     'start.sh': 'https://gist.githubusercontent.com/Takfes/f851ba72f994ec51c9bee09f1ba27417/raw/df2ecf222508121029ed23093f35de159798ed58/start.sh',
     'genreqs.sh': 'https://gist.githubusercontent.com/Takfes/f851ba72f994ec51c9bee09f1ba27417/raw/df2ecf222508121029ed23093f35de159798ed58/genreqs.sh'
 }
@@ -111,20 +111,20 @@ def download_and_write_file(gist_urls):
         else:
             print(f"Failed to download file from {gist_url}")
 
-def chmod_start():
-    print("✅ chmod start.sh...")
-    subprocess.run(["chmod", "+x", "start.sh"], check=True)
+# def chmod_start():
+#     print("✅ chmod start.sh...")
+#     subprocess.run(["chmod", "+x", "start.sh"], check=True)
 
-def generate_requirements_txt():
-    print("🔨 Generating requirements.txt...")
-    venv_python = './venv/bin/python'  # Path to the Python executable in the venv
-    # Run pip freeze and capture the output
-    pip_freeze_output = subprocess.run([venv_python, '-m', 'pip', 'freeze'], capture_output=True, text=True, check=True)
-    # Filter the output and write to requirements.txt
-    with open('requirements.txt', 'w') as requirements_file:
-        for line in pip_freeze_output.stdout.splitlines():
-            if '-e' not in line:  # Exclude lines with '-e'
-                requirements_file.write(line + '\n')
+# def generate_requirements_txt():
+#     print("🔨 Generating requirements.txt...")
+#     venv_python = './venv/bin/python'  # Path to the Python executable in the venv
+#     # Run pip freeze and capture the output
+#     pip_freeze_output = subprocess.run([venv_python, '-m', 'pip', 'freeze'], capture_output=True, text=True, check=True)
+#     # Filter the output and write to requirements.txt
+#     with open('requirements.txt', 'w') as requirements_file:
+#         for line in pip_freeze_output.stdout.splitlines():
+#             if '-e' not in line:  # Exclude lines with '-e'
+#                 requirements_file.write(line + '\n')
 
 def main():
     check_dependencies(REQUIREMENTS)
@@ -134,9 +134,9 @@ def main():
     create_virtualenv()
     upgrade_pip()
     install_packages(PACKAGE_LIST)
-    generate_requirements_txt()
+    # generate_requirements_txt()
     download_and_write_file(GIST_URLS)
-    chmod_start()
+    # chmod_start()
 
 if __name__ == '__main__':
     main()
